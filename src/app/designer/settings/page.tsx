@@ -28,7 +28,7 @@ const DESIGN_CATEGORIES = [
 ];
 
 export default function DesignerSettingsPage() {
-    const { user, isAuthenticated, updateUser } = useAuth();
+    const { user, isAuthenticated, refreshUser } = useAuth();
     const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
@@ -66,15 +66,15 @@ export default function DesignerSettingsPage() {
             setLoading(true);
             const response = await designerApi.getMyProfile();
             if (response.success && response.data) {
-                const data = response.data;
+                const data = response.data as any;
                 setFormData({
-                    name: data.name || '',
-                    bio: data.bio || '',
-                    avatar: data.avatar || '',
-                    location: data.location || '',
-                    website: data.website || '',
-                    skills: data.skills || [],
-                    designerLevel: data.designerLevel || 'entry'
+                    name: data?.name || '',
+                    bio: data?.bio || '',
+                    avatar: data?.avatar || '',
+                    location: data?.location || '',
+                    website: data?.website || '',
+                    skills: data?.skills || [],
+                    designerLevel: data?.designerLevel || 'entry'
                 });
             }
         } catch (error) {
@@ -91,8 +91,8 @@ export default function DesignerSettingsPage() {
             const response = await designerApi.updateProfile(formData);
             if (response.success && response.data) {
                 setSuccessMessage('Profile updated successfully!');
-                if (updateUser) {
-                    updateUser(response.data);
+                if (refreshUser) {
+                    await refreshUser();
                 }
                 setTimeout(() => setSuccessMessage(''), 3000);
             } else {

@@ -22,7 +22,7 @@ import { Button } from '@/components/ui/button';
 import { authApi } from '@/lib/api';
 
 export default function SettingsPage() {
-    const { user, isAuthenticated, updateUser } = useAuth();
+    const { user, isAuthenticated, refreshUser } = useAuth();
     const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
@@ -60,8 +60,8 @@ export default function SettingsPage() {
                     email: response.data.email || '',
                     bio: response.data.bio || '',
                     avatar: response.data.avatar || '',
-                    location: response.data.location || '',
-                    website: response.data.website || ''
+                    location: (response.data as any)?.location || '',
+                    website: (response.data as any)?.website || ''
                 });
             } else if (user) {
                 // Use user from context if API fails
@@ -70,8 +70,8 @@ export default function SettingsPage() {
                     email: user.email || '',
                     bio: user.bio || '',
                     avatar: user.avatar || '',
-                    location: user.location || '',
-                    website: user.website || ''
+                    location: (user as any)?.location || '',
+                    website: (user as any)?.website || ''
                 });
             }
         } catch (error) {
@@ -83,8 +83,8 @@ export default function SettingsPage() {
                     email: user.email || '',
                     bio: user.bio || '',
                     avatar: user.avatar || '',
-                    location: user.location || '',
-                    website: user.website || ''
+                    location: (user as any)?.location || '',
+                    website: (user as any)?.website || ''
                 });
             }
         } finally {
@@ -106,8 +106,8 @@ export default function SettingsPage() {
 
             if (response.success && response.data) {
                 setSuccessMessage('Profile updated successfully!');
-                if (updateUser) {
-                    updateUser(response.data);
+                if (refreshUser) {
+                    await refreshUser();
                 }
                 setTimeout(() => setSuccessMessage(''), 3000);
             } else {

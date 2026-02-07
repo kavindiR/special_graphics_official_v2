@@ -132,7 +132,7 @@ export default function DesignerMessagesPage() {
             const response = await messagesApi.getMyMessages({
                 isRead: filters.isRead !== '' ? filters.isRead === 'true' : undefined
             });
-            if (response.success && response.data && response.data.length > 0) {
+            if (response.success && response.data && Array.isArray(response.data) && response.data.length > 0) {
                 setMessages(response.data);
                 organizeConversations(response.data);
             } else {
@@ -193,7 +193,7 @@ export default function DesignerMessagesPage() {
     const loadConversation = async (otherUserId: number) => {
         try {
             const response = await messagesApi.getConversation(otherUserId);
-            if (response.success && response.data) {
+            if (response.success && response.data && Array.isArray(response.data)) {
                 const convMap = new Map(conversations);
                 convMap.set(otherUserId, response.data);
                 setConversations(convMap);

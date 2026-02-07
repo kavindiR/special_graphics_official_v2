@@ -149,7 +149,7 @@ export default function DesignerContestsPage() {
                 category: filters.category || undefined,
                 search: filters.search || undefined
             });
-            if (response.success && response.data && response.data.length > 0) {
+            if (response.success && response.data && Array.isArray(response.data) && response.data.length > 0) {
                 setContests(response.data);
             } else {
                 // Use dummy data if API returns empty or fails
@@ -179,7 +179,7 @@ export default function DesignerContestsPage() {
     const loadMySubmissions = async () => {
         try {
             const response = await contestsApi.getMySubmissions();
-            if (response.success && response.data) {
+            if (response.success && response.data && Array.isArray(response.data)) {
                 const submissionIds = new Set(response.data.map((s: any) => s.contestId));
                 setMySubmissions(submissionIds);
             }

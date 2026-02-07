@@ -126,3 +126,4 @@ User.hasMany(Earnings, {
 
 export default Earnings;
 
+

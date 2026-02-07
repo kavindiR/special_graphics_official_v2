@@ -124,7 +124,7 @@ export default function DesignerPortfolioPage() {
         try {
             setLoading(true);
             const response = await portfolioApi.getMyPortfolio();
-            if (response.success && response.data && response.data.length > 0) {
+            if (response.success && response.data && Array.isArray(response.data) && response.data.length > 0) {
                 setPortfolioItems(response.data);
             } else {
                 // Use dummy data if API returns empty

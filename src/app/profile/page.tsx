@@ -24,7 +24,7 @@ import { Button } from '@/components/ui/button';
 import { authApi, portfolioApi, designerApi } from '@/lib/api';
 
 export default function ProfilePage() {
-    const { user, isAuthenticated, updateUser } = useAuth();
+    const { user, isAuthenticated, refreshUser } = useAuth();
     const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [profileData, setProfileData] = useState<any>(null);
@@ -50,7 +50,7 @@ export default function ProfilePage() {
                 if (response.data.role === 'designer') {
                     // Load portfolio
                     const portfolioRes = await portfolioApi.getMyPortfolio();
-                    if (portfolioRes.success && portfolioRes.data) {
+                    if (portfolioRes.success && portfolioRes.data && Array.isArray(portfolioRes.data)) {
                         setPortfolioItems(portfolioRes.data.slice(0, 6) || []);
                     }
                     

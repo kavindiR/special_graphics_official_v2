@@ -129,3 +129,4 @@ User.hasMany(Portfolio, {
 
 export default Portfolio;
 
+

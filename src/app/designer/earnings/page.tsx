@@ -118,7 +118,7 @@ export default function DesignerEarningsPage() {
                 status: filters.status || undefined,
                 type: filters.type || undefined
             });
-            if (response.success && response.data && response.data.earnings && response.data.earnings.length > 0) {
+            if (response.success && response.data && typeof response.data === 'object' && 'earnings' in response.data && Array.isArray(response.data.earnings) && response.data.earnings.length > 0) {
                 setEarnings(response.data.earnings);
             } else {
                 // Use dummy data if API returns empty

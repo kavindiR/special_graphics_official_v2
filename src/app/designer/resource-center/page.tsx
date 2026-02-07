@@ -163,7 +163,7 @@ const TIER_INFO = {
 export default function DesignerResourceCenterPage() {
     const { user } = useAuth();
     const [expandedResource, setExpandedResource] = useState<number | null>(null);
-    const currentLevel = user?.designerLevel || 'entry';
+    const currentLevel = (user as any)?.designerLevel || 'entry';
     const tierInfo = TIER_INFO[currentLevel as keyof typeof TIER_INFO] || TIER_INFO.entry;
 
     return (
