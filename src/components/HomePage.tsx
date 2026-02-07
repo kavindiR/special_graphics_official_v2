@@ -100,7 +100,7 @@ export default function HomePage() {
                             Design for what you need
                         </h2>
 
-                        <div className="flex-1 max-w-xl w-full">
+                        <div className="flex-1 max-w-xl w-full md:mx-auto">
                             <div className="relative">
                                 <input
                                     type="text"

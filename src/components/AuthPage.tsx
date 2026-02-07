@@ -525,6 +525,9 @@ const SignInForm = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
 // --- MAIN APPLICATION ENTRY POINT (ROUTING LOGIC) ---
 // =========================================================================
 const App = () => {
+  const { user, isAuthenticated, loading } = useAuth();
+  const router = useRouter();
+
   // Check if coming from onboarding (has type parameter) - show signup
   const [page, setPage] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -538,6 +541,21 @@ const App = () => {
     return 'signin';
   });
 
+  // Redirect authenticated users away from auth page
+  useEffect(() => {
+    if (!loading && isAuthenticated && user) {
+      if (user.role === 'designer') {
+        router.push('/designer/dashboard');
+      } else if (user.role === 'client') {
+        router.push('/client/dashboard');
+      } else if (user.role === 'admin' || user.role === 'moderator') {
+        router.push('/adminpanel');
+      } else {
+        router.push('/');
+      }
+    }
+  }, [user, isAuthenticated, loading, router]);
+
   // Load the custom font using a standard link element - still needed for text elements
   const fontLink = (
     <link
@@ -546,6 +564,36 @@ const App = () => {
       href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap"
     />
   );
+
+  // Show loading state or nothing while checking auth
+  if (loading) {
+    return (
+      <>
+        {fontLink}
+        <div
+          className="min-h-screen flex items-center justify-center p-4 sm:p-6"
+          style={{ backgroundColor: BG_COLOR, fontFamily: 'var(--font-poppins), Poppins, sans-serif' }}
+        >
+          <div className="text-gray-600">Loading...</div>
+        </div>
+      </>
+    );
+  }
+
+  // Don't render auth forms if user is already authenticated (redirect will happen)
+  if (isAuthenticated && user) {
+    return (
+      <>
+        {fontLink}
+        <div
+          className="min-h-screen flex items-center justify-center p-4 sm:p-6"
+          style={{ backgroundColor: BG_COLOR, fontFamily: 'var(--font-poppins), Poppins, sans-serif' }}
+        >
+          <div className="text-gray-600">Redirecting...</div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>

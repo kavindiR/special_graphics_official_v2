@@ -10,11 +10,21 @@ export interface UserAttributes {
   avatar?: string;
   bio?: string;
   isVerified: boolean;
+  // Designer-specific fields
+  designerLevel?: 'entry' | 'mid' | 'top';
+  rating?: number;
+  totalEarnings?: number;
+  contestsWon?: number;
+  totalSubmissions?: number;
+  portfolioViews?: number;
+  skills?: string[];
+  location?: string;
+  website?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-export interface UserCreationAttributes extends Optional<UserAttributes, 'id' | 'avatar' | 'bio' | 'isVerified' | 'createdAt' | 'updatedAt'> {}
+export interface UserCreationAttributes extends Optional<UserAttributes, 'id' | 'avatar' | 'bio' | 'isVerified' | 'designerLevel' | 'rating' | 'totalEarnings' | 'contestsWon' | 'totalSubmissions' | 'portfolioViews' | 'skills' | 'location' | 'website' | 'createdAt' | 'updatedAt'> {}
 
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
   public id!: number;
@@ -25,6 +35,15 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   public avatar?: string;
   public bio?: string;
   public isVerified!: boolean;
+  public designerLevel?: 'entry' | 'mid' | 'top';
+  public rating?: number;
+  public totalEarnings?: number;
+  public contestsWon?: number;
+  public totalSubmissions?: number;
+  public portfolioViews?: number;
+  public skills?: string[];
+  public location?: string;
+  public website?: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
@@ -102,6 +121,63 @@ User.init(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull: false
+    },
+    designerLevel: {
+      type: DataTypes.ENUM('entry', 'mid', 'top'),
+      allowNull: true,
+      defaultValue: 'entry'
+    },
+    rating: {
+      type: DataTypes.DECIMAL(3, 2),
+      allowNull: true,
+      defaultValue: 0,
+      validate: {
+        min: 0,
+        max: 5
+      }
+    },
+    totalEarnings: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: true,
+      defaultValue: 0
+    },
+    contestsWon: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0
+    },
+    totalSubmissions: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0
+    },
+    portfolioViews: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0
+    },
+    skills: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+      defaultValue: []
+    },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    website: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        isValidUrl(value: string | null | undefined) {
+          if (value && value.trim() !== '') {
+            const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+            if (!urlPattern.test(value)) {
+              throw new Error('Please provide a valid website URL');
+            }
+          }
+        }
+      }
     }
   },
   {

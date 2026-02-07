@@ -58,26 +58,6 @@ export default function Hero() {
                 <p className="text-gray-200 mb-8 max-w-2xl text-base md:text-lg drop-shadow-md">
                     No matter what your business needs, we can connect you with a creative expert. What do you need to design?
                 </p>
-
-                <div className="flex flex-wrap justify-center gap-3 md:gap-5 mb-10 text-base md:text-lg lg:text-xl text-gray-200">
-                    <span className="py-2 font-semibold">Popular :</span>
-                    <span className="bg-white/10 backdrop-blur-sm px-4 py-2 md:px-5 md:py-2.5 rounded text-yellow-100 border border-yellow-500/30 text-sm md:text-base lg:text-lg font-medium">Package Design</span>
-                    <span className="bg-white/10 backdrop-blur-sm px-4 py-2 md:px-5 md:py-2.5 rounded text-yellow-100 border border-yellow-500/30 text-sm md:text-base lg:text-lg font-medium">Logo Design</span>
-                    <span className="bg-white/10 backdrop-blur-sm px-4 py-2 md:px-5 md:py-2.5 rounded text-yellow-100 border border-yellow-500/30 text-sm md:text-base lg:text-lg font-medium">UI/UX Design</span>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                    <Link href="/hire-designer">
-                        <button className="bg-[#ff00cc] hover:bg-[#d900ad] text-white font-bold py-3 px-8 md:py-4 md:px-10 rounded shadow-[0_0_20px_rgba(255,0,204,0.4)] transition-all cursor-pointer">
-                            Hire a Designer
-                        </button>
-                    </Link>
-                    <Link href="/start-contest">
-                        <button className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-bold py-3 px-8 md:py-4 md:px-10 rounded border border-white/30 transition-all cursor-pointer">
-                            Start a Contest
-                        </button>
-                    </Link>
-                </div>
             </div>
 
             {/* Decorative Wave Bottom */}

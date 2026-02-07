@@ -32,43 +32,87 @@ const initialDesigns: Design[] = [
     description: "Gift Box for realtors in collaboration with Finchberry products.",
     tags: ['Logo', 'Branding'],
     tools: 'Illustrator',
-    image: '/inspiration/1.jpeg', 
+    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=600&fit=crop', 
     isLiked: false
   },
   { 
     id: 2, title: 'Modern Coffee Brand', designer: 'Studio_K', likes: 45, 
     description: "Modern minimalist branding.", tags: ['Branding'], tools: 'Photoshop',
-    image: '/inspiration/2.jpeg', isLiked: true 
+    image: 'https://images.unsplash.com/photo-1633409361618-c73427e4e206?w=600&h=600&fit=crop', isLiked: true 
   },
   { 
     id: 3, title: 'Neon Cyberpunk', designer: 'Neon_Arts', likes: 32, 
     description: "Futuristic poster design.", tags: ['Poster'], tools: 'Procreate',
-    image: '/inspiration/3.jpeg', isLiked: false 
+    image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=600&h=600&fit=crop', isLiked: false 
   },
   { 
     id: 4, title: 'Eco Packaging', designer: 'Pack_Master', likes: 89, 
     description: "Sustainable packaging.", tags: ['Packaging'], tools: 'Blender',
-    image: '/inspiration/4.jpeg', isLiked: false 
+    image: 'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&h=600&fit=crop', isLiked: false 
   },
   { 
     id: 5, title: 'Corporate Web UI', designer: 'UI_Ninja', likes: 12, 
     description: "Clean website layout.", tags: ['Web Design'], tools: 'Figma',
-    image: '/inspiration/5.png', isLiked: false 
+    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=600&fit=crop', isLiked: false 
   },
   { 
     id: 6, title: 'Fitness App', designer: 'App_Wiz', likes: 67, 
     description: "Dark mode mobile interface.", tags: ['App'], tools: 'Figma',
-    image: '/inspiration/6.jpg', isLiked: true 
+    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=600&fit=crop', isLiked: true 
   },
   { 
     id: 7, title: 'Vintage Label', designer: 'Old_School', likes: 55, 
     description: "Hand-drawn vintage label.", tags: ['Label'], tools: 'Illustrator',
-    image: '/inspiration/7.jpg', isLiked: false 
+    image: 'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=600&h=600&fit=crop', isLiked: false 
   },
   { 
     id: 8, title: 'Abstract Album Art', designer: 'Music_Visuals', likes: 102, 
     description: "Abstract 3D render.", tags: ['Album Art'], tools: 'Cinema 4D',
-    image: '/inspiration/8.png', isLiked: true 
+    image: 'https://images.unsplash.com/photo-1578301978018-3005759f48f7?w=600&h=600&fit=crop', isLiked: true 
+  },
+  {
+    id: 9,
+    title: 'Tech Startup Logo',
+    designer: 'TechDesign',
+    likes: 23,
+    description: "Bold and modern logo for a tech startup company.",
+    tags: ['Logo', 'Tech'],
+    tools: 'Illustrator',
+    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=600&fit=crop',
+    isLiked: false
+  },
+  {
+    id: 10,
+    title: 'Fashion Brand Identity',
+    designer: 'FashionStudio',
+    likes: 78,
+    description: "Elegant brand identity for a luxury fashion brand.",
+    tags: ['Branding', 'Fashion'],
+    tools: 'Photoshop',
+    image: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&h=600&fit=crop',
+    isLiked: true
+  },
+  {
+    id: 11,
+    title: 'Restaurant Menu Design',
+    designer: 'CulinaryDesign',
+    likes: 56,
+    description: "Beautiful menu design for a modern restaurant.",
+    tags: ['Print Design', 'Menu'],
+    tools: 'InDesign',
+    image: 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=600&h=600&fit=crop',
+    isLiked: false
+  },
+  {
+    id: 12,
+    title: 'E-commerce Website',
+    designer: 'WebPro',
+    likes: 91,
+    description: "Modern e-commerce website with focus on user experience.",
+    tags: ['Web Design', 'E-commerce'],
+    tools: 'Figma',
+    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=600&fit=crop',
+    isLiked: true
   }
 ];
 

@@ -46,8 +46,12 @@ export default function FindDesignerPage() {
             reviews: 124,
             contestsWon: 15,
             skills: ['Logo Design', 'Branding', 'Illustration'],
-            avatar: '/avatars/elena.jpg', // Placeholder
-            portfolio: ['/portfolio/1.jpg', '/portfolio/2.jpg', '/portfolio/3.jpg']
+            avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face',
+            portfolio: [
+                'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1633409361618-c73427e4e206?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop'
+            ]
         },
         {
             id: 2,
@@ -58,8 +62,12 @@ export default function FindDesignerPage() {
             reviews: 98,
             contestsWon: 12,
             skills: ['Web Design', 'UI/UX', 'Mobile Apps'],
-            avatar: '/avatars/marcus.jpg',
-            portfolio: ['/portfolio/4.jpg', '/portfolio/5.jpg', '/portfolio/6.jpg']
+            avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+            portfolio: [
+                'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1558655146-364adaf1fcc9?w=400&h=300&fit=crop'
+            ]
         },
         {
             id: 3,
@@ -70,8 +78,12 @@ export default function FindDesignerPage() {
             reviews: 45,
             contestsWon: 5,
             skills: ['Packaging', 'Label Design'],
-            avatar: '/avatars/sarah.jpg',
-            portfolio: ['/portfolio/7.jpg', '/portfolio/8.jpg', '/portfolio/9.jpg']
+            avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+            portfolio: [
+                'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=400&h=300&fit=crop'
+            ]
         },
         {
             id: 4,
@@ -82,8 +94,12 @@ export default function FindDesignerPage() {
             reviews: 32,
             contestsWon: 3,
             skills: ['Illustration', 'Character Design'],
-            avatar: '/avatars/david.jpg',
-            portfolio: ['/portfolio/10.jpg', '/portfolio/11.jpg', '/portfolio/12.jpg']
+            avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face',
+            portfolio: [
+                'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1578301978018-3005759f48f7?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=400&h=300&fit=crop'
+            ]
         },
         {
             id: 5,
@@ -94,8 +110,12 @@ export default function FindDesignerPage() {
             reviews: 15,
             contestsWon: 1,
             skills: ['Logo Design', 'Business Cards'],
-            avatar: '/avatars/jessica.jpg',
-            portfolio: ['/portfolio/13.jpg', '/portfolio/14.jpg', '/portfolio/15.jpg']
+            avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face',
+            portfolio: [
+                'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1633409361618-c73427e4e206?w=400&h=300&fit=crop'
+            ]
         },
         {
             id: 6,
@@ -106,8 +126,12 @@ export default function FindDesignerPage() {
             reviews: 10,
             contestsWon: 0,
             skills: ['T-Shirt Design', 'Merchandise'],
-            avatar: '/avatars/tom.jpg',
-            portfolio: ['/portfolio/16.jpg', '/portfolio/17.jpg', '/portfolio/18.jpg']
+            avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
+            portfolio: [
+                'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=400&h=300&fit=crop',
+                'https://images.unsplash.com/photo-1578301978018-3005759f48f7?w=400&h=300&fit=crop'
+            ]
         }
     ];
 
@@ -231,22 +255,38 @@ export default function FindDesignerPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                             {designers.map((designer) => (
                                 <div key={designer.id} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-                                    {/* Portfolio Preview - Mock Images */}
+                                    {/* Portfolio Preview - Real Images */}
                                     <div className="h-32 bg-gray-100 flex items-center justify-center relative overflow-hidden">
-                                        {/* We will just use colored blocks for now as we don't have real images */}
                                         <div className="grid grid-cols-3 w-full h-full">
-                                            <div className="bg-blue-100"></div>
-                                            <div className="bg-pink-100"></div>
-                                            <div className="bg-yellow-100"></div>
+                                            {designer.portfolio.slice(0, 3).map((img, idx) => (
+                                                <div key={idx} className="relative overflow-hidden">
+                                                    <img 
+                                                        src={img} 
+                                                        alt={`${designer.name} portfolio ${idx + 1}`}
+                                                        className="w-full h-full object-cover"
+                                                        onError={(e) => {
+                                                            const target = e.target as HTMLImageElement;
+                                                            target.src = `https://via.placeholder.com/400x300/cccccc/666666?text=Design+${idx + 1}`;
+                                                        }}
+                                                    />
+                                                </div>
+                                            ))}
                                         </div>
                                         <div className="absolute inset-0 bg-black/5 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
-                                            <Button variant="secondary" size="sm">View Portfolio</Button>
+                                            <Button 
+                                                variant="secondary" 
+                                                size="sm"
+                                                onClick={() => window.location.href = `/designer/profile/${designer.id}`}
+                                            >
+                                                View Portfolio
+                                            </Button>
                                         </div>
                                     </div>
 
                                     <div className="p-4 relative">
                                         <div className="absolute -top-10 left-4">
                                             <Avatar className="h-16 w-16 border-4 border-white shadow-sm">
+                                                <AvatarImage src={designer.avatar} alt={designer.name} />
                                                 <AvatarFallback className="bg-black text-white">{designer.name.charAt(0)}</AvatarFallback>
                                             </Avatar>
                                         </div>
@@ -281,8 +321,11 @@ export default function FindDesignerPage() {
                                                 </div>
                                             </div>
 
-                                            <Button className="w-full mt-4 bg-white text-black border border-gray-300 hover:bg-gray-50">
-                                                Invite to Work
+                                            <Button 
+                                                className="w-full mt-4 bg-white text-black border border-gray-300 hover:bg-gray-50"
+                                                onClick={() => window.location.href = `/designer/profile/${designer.id}`}
+                                            >
+                                                View Profile
                                             </Button>
                                         </div>
                                     </div>

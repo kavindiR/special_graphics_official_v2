@@ -97,13 +97,18 @@ export default function ContestPage() {
                 </div>
             </div>
             <div className="flex flex-col items-end gap-2">
-                <button className="bg-[#111] text-white px-8 py-3 text-xs font-bold uppercase tracking-wider rounded-md hover:bg-black transition-colors shadow-sm font-body">Submit Design</button>
+                <a 
+                    href="/submit-files"
+                    className="bg-[#111] text-white px-8 py-3 text-xs font-bold uppercase tracking-wider rounded-md hover:bg-black transition-colors shadow-sm font-body inline-block text-center"
+                >
+                    Submit Design
+                </a>
                 <div className="text-xl font-heading font-bold text-gray-900">{contest.price} USD</div>
             </div>
           </div>
           <div className="bg-[#1A1A1A] text-white px-4 py-3 rounded-md flex items-center gap-3 text-sm mb-8 shadow-md font-body">
              <Clock className="w-4 h-4 text-white" />
-             <p>You have <span className="font-bold">{contest.timeLeft}</span> left to <span className="underline cursor-pointer">submit design concepts.</span></p>
+             <p>You have <span className="font-bold">{contest.timeLeft}</span> left to <a href="/submit-files" className="underline cursor-pointer hover:text-gray-300">submit design concepts.</a></p>
           </div>
           <div className="flex gap-8 text-sm font-bold border-b border-gray-200 font-body">
              <button className="pb-4 text-gray-500 hover:text-black transition-colors">Brief</button>

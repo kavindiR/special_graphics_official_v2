@@ -11,12 +11,24 @@ import { notFound } from './middleware/notFound';
 // Import models to initialize them
 import './models/User.model';
 import './models/Design.model';
+import './models/Contest.model';
+import './models/ContestSubmission.model';
+import './models/Portfolio.model';
+import './models/Earnings.model';
+import './models/Message.model';
+import './models/Project.model';
 
 // Import routes
 import authRoutes from './routes/auth.routes';
 import inspirationsRoutes from './routes/inspirations.routes';
 import designsRoutes from './routes/designs.routes';
 import usersRoutes from './routes/users.routes';
+import contestsRoutes from './routes/contests.routes';
+import portfolioRoutes from './routes/portfolio.routes';
+import earningsRoutes from './routes/earnings.routes';
+import messagesRoutes from './routes/messages.routes';
+import designerRoutes from './routes/designer.routes';
+import projectsRoutes from './routes/projects.routes';
 
 // Load environment variables
 dotenv.config();
@@ -55,6 +67,12 @@ app.use('/api/auth', authRoutes);
 app.use('/api/inspirations', inspirationsRoutes);
 app.use('/api/designs', designsRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api/contests', contestsRoutes);
+app.use('/api/portfolio', portfolioRoutes);
+app.use('/api/earnings', earningsRoutes);
+app.use('/api/messages', messagesRoutes);
+app.use('/api/designer', designerRoutes);
+app.use('/api/projects', projectsRoutes);
 
 // Error handling middleware (must be last)
 app.use(notFound);

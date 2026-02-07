@@ -12,8 +12,18 @@ export default function ConditionalLayout({
 }) {
   const pathname = usePathname();
   const isAdminRoute = pathname?.startsWith('/adminpanel');
+  const isDesignerRoute = pathname?.startsWith('/designer');
 
   if (isAdminRoute) {
+    return (
+      <AuthProviderWrapper>
+        {children}
+      </AuthProviderWrapper>
+    );
+  }
+
+  // Designer routes don't use the global Header/Footer - they have their own navigation
+  if (isDesignerRoute) {
     return (
       <AuthProviderWrapper>
         {children}

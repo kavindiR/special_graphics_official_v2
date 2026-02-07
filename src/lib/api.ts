@@ -181,5 +181,132 @@ export const authApi = {
 
     return response;
   },
+
+  // Update profile
+  updateProfile: async (data: { name?: string; bio?: string; avatar?: string; location?: string; website?: string }): Promise<ApiResponse<AuthResponse['user']>> => {
+    const response = await apiRequest<AuthResponse['user']>('/auth/profile', {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+
+    if (response.success && response.data && typeof window !== 'undefined') {
+      localStorage.setItem('user', JSON.stringify(response.data));
+    }
+
+    return response;
+  },
+};
+
+// Contests API
+export const contestsApi = {
+  getAll: async (params?: { status?: string; category?: string; search?: string }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.status) queryParams.append('status', params.status);
+    if (params?.category) queryParams.append('category', params.category);
+    if (params?.search) queryParams.append('search', params.search);
+    return apiRequest(`/contests?${queryParams.toString()}`);
+  },
+  getById: async (id: number) => apiRequest(`/contests/${id}`),
+  create: async (data: any) => apiRequest('/contests', { method: 'POST', body: JSON.stringify(data) }),
+  submit: async (contestId: number, data: { imageUrl: string; description?: string }) =>
+    apiRequest(`/contests/${contestId}/submit`, { method: 'POST', body: JSON.stringify(data) }),
+  getMySubmissions: async () => apiRequest('/contests/my/submissions'),
+};
+
+// Portfolio API
+export const portfolioApi = {
+  getAll: async (params?: { category?: string; search?: string; designerId?: number }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.category) queryParams.append('category', params.category);
+    if (params?.search) queryParams.append('search', params.search);
+    if (params?.designerId) queryParams.append('designerId', params.designerId.toString());
+    return apiRequest(`/portfolio?${queryParams.toString()}`);
+  },
+  getById: async (id: number) => apiRequest(`/portfolio/${id}`),
+  getMyPortfolio: async () => apiRequest('/portfolio/my/portfolio'),
+  create: async (data: any) => apiRequest('/portfolio', { method: 'POST', body: JSON.stringify(data) }),
+  update: async (id: number, data: any) =>
+    apiRequest(`/portfolio/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  delete: async (id: number) => apiRequest(`/portfolio/${id}`, { method: 'DELETE' }),
+};
+
+// Earnings API
+export const earningsApi = {
+  getMyEarnings: async (params?: { status?: string; type?: string }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.status) queryParams.append('status', params.status);
+    if (params?.type) queryParams.append('type', params.type);
+    return apiRequest(`/earnings/my?${queryParams.toString()}`);
+  },
+  getStats: async () => apiRequest('/earnings/my/stats'),
+  requestWithdrawal: async (amount: number) =>
+    apiRequest('/earnings/withdraw', { method: 'POST', body: JSON.stringify({ amount }) }),
+};
+
+// Messages API
+export const messagesApi = {
+  getMyMessages: async (params?: { isRead?: boolean }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.isRead !== undefined) queryParams.append('isRead', params.isRead.toString());
+    return apiRequest(`/messages?${queryParams.toString()}`);
+  },
+  getConversation: async (otherUserId: number, contestId?: number) => {
+    const queryParams = new URLSearchParams();
+    queryParams.append('otherUserId', otherUserId.toString());
+    if (contestId) queryParams.append('contestId', contestId.toString());
+    return apiRequest(`/messages/conversation?${queryParams.toString()}`);
+  },
+  send: async (data: { receiverId: number; content: string; subject?: string; contestId?: number }) =>
+    apiRequest('/messages', { method: 'POST', body: JSON.stringify(data) }),
+  markAsRead: async (id: number) => apiRequest(`/messages/${id}/read`, { method: 'PUT' }),
+  getUnreadCount: async () => apiRequest('/messages/unread/count'),
+};
+
+// Designer API
+export const designerApi = {
+  getAll: async (params?: { level?: string; search?: string; minRating?: number }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.level) queryParams.append('level', params.level);
+    if (params?.search) queryParams.append('search', params.search);
+    if (params?.minRating) queryParams.append('minRating', params.minRating.toString());
+    return apiRequest(`/designer?${queryParams.toString()}`);
+  },
+  getProfile: async (id: number) => apiRequest(`/designer/${id}`),
+  getMyStats: async () => apiRequest('/designer/my/stats'),
+  getMyProfile: async () => apiRequest('/designer/my/profile'),
+  getMyContests: async (params?: { status?: string; category?: string }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.status) queryParams.append('status', params.status);
+    if (params?.category) queryParams.append('category', params.category);
+    return apiRequest(`/designer/my/contests?${queryParams.toString()}`);
+  },
+  getMyProjects: async (params?: { status?: string }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.status) queryParams.append('status', params.status);
+    return apiRequest(`/designer/my/projects?${queryParams.toString()}`);
+  },
+  updateProfile: async (data: any) =>
+    apiRequest('/designer/my/profile', { method: 'PUT', body: JSON.stringify(data) }),
+};
+
+// Projects API
+export const projectsApi = {
+  getOpenProjects: async (params?: { category?: string; minBudget?: number; maxBudget?: number; search?: string }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.category) queryParams.append('category', params.category);
+    if (params?.minBudget) queryParams.append('minBudget', params.minBudget.toString());
+    if (params?.maxBudget) queryParams.append('maxBudget', params.maxBudget.toString());
+    if (params?.search) queryParams.append('search', params.search);
+    return apiRequest(`/projects/open?${queryParams.toString()}`);
+  },
+  getById: async (id: number) => apiRequest(`/projects/${id}`),
+  getMyProjects: async (params?: { status?: string }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.status) queryParams.append('status', params.status);
+    return apiRequest(`/projects/my/projects?${queryParams.toString()}`);
+  },
+  acceptProject: async (id: number) => apiRequest(`/projects/${id}/accept`, { method: 'POST' }),
+  updateStatus: async (id: number, status: string) =>
+    apiRequest(`/projects/${id}/status`, { method: 'PUT', body: JSON.stringify({ status }) }),
 };
 

@@ -167,7 +167,7 @@ export const updateProfile = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const { name, bio, avatar } = req.body;
+    const { name, bio, avatar, location, website } = req.body;
     const userId = parseInt(req.user?.id || '0');
 
     if (!userId) {
@@ -183,8 +183,16 @@ export const updateProfile = async (
       throw error;
     }
 
+    // Prepare update data
+    const updateData: any = {};
+    if (name !== undefined) updateData.name = name;
+    if (bio !== undefined) updateData.bio = bio;
+    if (avatar !== undefined) updateData.avatar = avatar;
+    if (location !== undefined) updateData.location = location;
+    if (website !== undefined) updateData.website = website;
+
     // Update user
-    await user.update({ name, bio, avatar });
+    await user.update(updateData);
 
     res.status(200).json({
       success: true,

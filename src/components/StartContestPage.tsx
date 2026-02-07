@@ -69,8 +69,8 @@ export default function StartContestPage() {
             window.location.href = '/auth';
             return;
         }
-        // Navigate to contest creation form
-        window.location.href = '/contest/create';
+        // Show success message and navigate
+        alert('Contest creation feature coming soon! For now, you can browse existing contests.');
     };
 
     return (
@@ -98,10 +98,16 @@ export default function StartContestPage() {
                             Get dozens of unique design concepts from talented designers around the world. Choose your favorite and work with the designer to perfect it.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <Link href="/hire-designer">
-                                <button className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-bold py-3 px-8 md:py-4 md:px-10 rounded border border-white/30 transition-all cursor-pointer">
-                                    Or Find a Designer Directly
-                                    <ArrowRight className="inline-block ml-2 h-4 w-4" />
+                            <button
+                                onClick={handleStartContest}
+                                className="bg-[#ff00cc] hover:bg-[#e600b8] text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg flex items-center justify-center gap-2"
+                            >
+                                Start Your Contest
+                                <ArrowRight className="w-5 h-5" />
+                            </button>
+                            <Link href="/contest">
+                                <button className="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors">
+                                    Browse Contests
                                 </button>
                             </Link>
                         </div>
