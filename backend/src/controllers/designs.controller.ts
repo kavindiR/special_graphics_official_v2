@@ -49,7 +49,7 @@ export const createDesign = async (
 
 // Get all designs
 export const getAllDesigns = async (
-  req: AuthRequest,
+  _req: AuthRequest,
   res: Response,
   next: NextFunction
 ): Promise<void> => {

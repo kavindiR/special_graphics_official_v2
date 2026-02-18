@@ -1,6 +1,6 @@
 import { Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
 import User from '../models/User.model';
 import { AuthRequest } from '../middleware/auth';
@@ -8,10 +8,11 @@ import { AppError } from '../middleware/errorHandler';
 
 // Generate JWT Token
 const generateToken = (id: number | string, email: string, role: string): string => {
+  const expiresIn = process.env.JWT_EXPIRE || '7d';
   return jwt.sign(
     { id: id.toString(), email, role },
     process.env.JWT_SECRET || 'fallback-secret',
-    { expiresIn: process.env.JWT_EXPIRE || '7d' }
+    { expiresIn } as SignOptions
   );
 };
 
@@ -206,7 +207,7 @@ export const updateProfile = async (
 
 // Logout user (client-side token removal, but provides confirmation)
 export const logout = async (
-  req: AuthRequest,
+  _req: AuthRequest,
   res: Response,
   next: NextFunction
 ): Promise<void> => {

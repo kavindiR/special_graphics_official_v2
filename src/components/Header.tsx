@@ -105,13 +105,13 @@ export default function Header() {
 
     return (
         <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
-            <nav className="w-full px-6 md:px-8 lg:px-10">
-                <div className="flex items-center justify-between h-20 lg:h-24">
+            <nav className="w-full px-4 sm:px-6 md:px-8 lg:px-10">
+                <div className="flex items-center justify-between h-16 sm:h-18 md:h-20 lg:h-24">
 
                     {/* Logo (Left Side) */}
                     <div className="flex-shrink-0">
-                        <Link href="/" className="block">
-                            <span className="text-2xl md:text-3xl text-gray-900 tracking-tight">
+                        <Link href="/" className="block touch-manipulation">
+                            <span className="text-xl sm:text-2xl md:text-3xl text-gray-900 tracking-tight">
                                 <span className="font-normal">Special</span>{' '}
                                 <span className="font-bold">Graphics</span>
                             </span>
@@ -159,13 +159,13 @@ export default function Header() {
                     </div>
 
                     {/* Action Buttons (Right Side) */}
-                    <div className="flex items-center gap-3 md:gap-4">
+                    <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
                         {!loading && isAuthenticated && user ? (
                             <>
                                 {/* Notifications */}
                                 <Link
                                     href="/notifications"
-                                    className="hidden sm:flex p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors relative"
+                                    className="hidden sm:flex p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 active:bg-gray-200 rounded-full transition-colors relative min-w-[40px] min-h-[40px] items-center justify-center touch-manipulation"
                                     aria-label="Notifications"
                                 >
                                     <Bell className="h-5 w-5" />
@@ -174,7 +174,7 @@ export default function Header() {
 
                                 {/* Messages */}
                                 <button
-                                    className="hidden sm:flex p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors"
+                                    className="hidden sm:flex p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 active:bg-gray-200 rounded-full transition-colors min-w-[40px] min-h-[40px] items-center justify-center touch-manipulation"
                                     aria-label="Messages"
                                 >
                                     <MessageSquare className="h-5 w-5" />
@@ -183,10 +183,10 @@ export default function Header() {
                                 {/* User Menu */}
                                 <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
-                                        <button className="flex items-center gap-2 p-1.5 rounded-full hover:bg-gray-100 transition-colors focus:outline-none">
-                                            <Avatar className="h-8 w-8 border-2 border-gray-200">
+                                        <button className="flex items-center gap-2 p-1.5 rounded-full hover:bg-gray-100 active:bg-gray-200 transition-colors focus:outline-none min-w-[44px] min-h-[44px] touch-manipulation">
+                                            <Avatar className="h-8 w-8 sm:h-9 sm:w-9 border-2 border-gray-200">
                                                 <AvatarImage src={user.avatar} alt={user.name} />
-                                                <AvatarFallback className="bg-gray-800 text-white text-sm font-semibold">
+                                                <AvatarFallback className="bg-gray-800 text-white text-xs sm:text-sm font-semibold">
                                                     {user.name?.charAt(0).toUpperCase() || 'U'}
                                                 </AvatarFallback>
                                             </Avatar>
@@ -268,7 +268,7 @@ export default function Header() {
 
                         {/* Mobile Menu Toggle */}
                         <button
-                            className="lg:hidden p-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+                            className="lg:hidden p-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 active:bg-gray-200 rounded-md transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation"
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             aria-label="Toggle mobile menu"
                             aria-expanded={mobileMenuOpen}
@@ -284,10 +284,10 @@ export default function Header() {
 
                 {/* Mobile Menu */}
                 <div
-                    className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+                    className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
                         }`}
                 >
-                    <div className="border-t border-gray-100 py-4 space-y-1">
+                    <div className="border-t border-gray-100 py-3 sm:py-4 space-y-1">
                         {getNavItems(user?.role).map((item) => (
                             <div key={item.label}>
                                 {item.dropdown ? (
@@ -309,7 +309,7 @@ export default function Header() {
                                 ) : (
                                     <Link
                                         href={item.href || '#'}
-                                        className="flex items-center justify-between px-4 py-3 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+                                        className="flex items-center justify-between px-4 py-3 sm:py-3.5 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 active:bg-gray-100 rounded-md transition-colors min-h-[44px] touch-manipulation"
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         <span>{item.label}</span>

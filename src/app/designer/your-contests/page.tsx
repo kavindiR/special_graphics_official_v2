@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { 
     Search, 
@@ -15,6 +15,7 @@ import {
     Calendar,
     TrendingUp,
     CheckCircle2,
+    Eye,
     ArrowUpDown,
     ArrowUp,
     ArrowDown
@@ -27,37 +28,51 @@ const DESIGN_CATEGORIES = [
     'Social Media', 'Illustration', 'Typography', 'Icon Design', 'App Design'
 ];
 
-export default function DesignerContestsPage() {
+export default function YourContestsPage() {
     const { user, isAuthenticated } = useAuth();
     const router = useRouter();
+    const searchParams = useSearchParams();
     const [contests, setContests] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    
+    // Get state from URL params
+    const state = searchParams.get('state') || 'active';
+    const activeState = searchParams.get('active-state') || 'all';
+    const order = searchParams.get('order') || 'time-left';
+    const dir = searchParams.get('dir') || 'asc';
+    
     const [filters, setFilters] = useState({
         search: '',
         category: '',
-        status: 'open',
+        status: state === 'active' ? 'open' : state === 'watching' ? 'watching' : 'all',
         minPrize: '',
         maxPrize: ''
     });
-    const [sortBy, setSortBy] = useState<'time-left' | 'prize' | 'entries'>('time-left');
-    const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc');
     const [mySubmissions, setMySubmissions] = useState<Set<number>>(new Set());
+    const [watchingContests, setWatchingContests] = useState<Set<number>>(new Set());
 
     useEffect(() => {
         if (typeof window !== 'undefined' && (!isAuthenticated || user?.role !== 'designer')) {
             router.push('/auth');
             return;
         }
-        loadContests();
         loadMySubmissions();
+        loadWatchingContests();
     }, [isAuthenticated, user, router]);
 
-    // Dummy contests data with images
+    useEffect(() => {
+        if (isAuthenticated && user?.role === 'designer') {
+            loadContests();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [state, activeState, order, dir]);
+
+    // Dummy contests data
     const dummyContests = [
         {
             id: 1,
             title: 'Modern Logo for Tech Startup',
-            description: 'Looking for a sleek, modern logo design for our innovative tech startup. We need something that represents innovation and technology.',
+            description: 'Looking for a sleek, modern logo design for our innovative tech startup.',
             category: 'Logo Design',
             prize: 299,
             status: 'open',
@@ -67,12 +82,14 @@ export default function DesignerContestsPage() {
                 name: 'Tech Innovations Inc.',
                 avatar: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=100&h=100&fit=crop'
             },
-            submissions: []
+            submissions: [],
+            isWatching: true,
+            timeLeft: 2
         },
         {
             id: 2,
             title: 'Brand Identity Package',
-            description: 'Complete brand identity package including logo, color palette, typography, and brand guidelines for a new fashion brand.',
+            description: 'Complete brand identity package including logo, color palette, typography.',
             category: 'Branding',
             prize: 499,
             status: 'qualifying',
@@ -82,12 +99,14 @@ export default function DesignerContestsPage() {
                 name: 'Fashion Forward',
                 avatar: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=100&h=100&fit=crop'
             },
-            submissions: []
+            submissions: [],
+            isWatching: false,
+            timeLeft: 5
         },
         {
             id: 3,
             title: 'Website Redesign',
-            description: 'Complete website redesign for a modern, responsive look. Need UI/UX design for desktop and mobile platforms.',
+            description: 'Complete website redesign for a modern, responsive look.',
             category: 'Web Design',
             prize: 799,
             status: 'final_round',
@@ -97,12 +116,14 @@ export default function DesignerContestsPage() {
                 name: 'Digital Solutions Co.',
                 avatar: 'https://images.unsplash.com/photo-1633409361618-c73427e4e206?w=100&h=100&fit=crop'
             },
-            submissions: []
+            submissions: [],
+            isWatching: true,
+            timeLeft: 1
         },
         {
             id: 4,
             title: 'Product Packaging Design',
-            description: 'Eye-catching packaging design for organic skincare products. Need eco-friendly, minimalist design approach.',
+            description: 'Eye-catching packaging design for organic skincare products.',
             category: 'Packaging',
             prize: 349,
             status: 'open',
@@ -112,12 +133,14 @@ export default function DesignerContestsPage() {
                 name: 'Natural Beauty Co.',
                 avatar: 'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=100&h=100&fit=crop'
             },
-            submissions: []
+            submissions: [],
+            isWatching: false,
+            timeLeft: 7
         },
         {
             id: 5,
             title: 'Social Media Graphics Package',
-            description: 'Complete social media graphics package including posts, stories, and banner designs for Instagram and Facebook.',
+            description: 'Complete social media graphics package for Instagram and Facebook.',
             category: 'Social Media',
             prize: 249,
             status: 'open',
@@ -127,12 +150,14 @@ export default function DesignerContestsPage() {
                 name: 'Social Media Pro',
                 avatar: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=100&h=100&fit=crop'
             },
-            submissions: []
+            submissions: [],
+            isWatching: true,
+            timeLeft: 3
         },
         {
             id: 6,
             title: 'Illustration for Children\'s Book',
-            description: 'Colorful, engaging illustrations for a children\'s book. Need 10-12 illustrations in a consistent style.',
+            description: 'Colorful, engaging illustrations for a children\'s book.',
             category: 'Illustration',
             prize: 599,
             status: 'qualifying',
@@ -142,7 +167,9 @@ export default function DesignerContestsPage() {
                 name: 'Kids Publishing House',
                 avatar: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=100&h=100&fit=crop'
             },
-            submissions: []
+            submissions: [],
+            isWatching: false,
+            timeLeft: 10
         }
     ];
 
@@ -154,45 +181,41 @@ export default function DesignerContestsPage() {
                 category: filters.category || undefined,
                 search: filters.search || undefined
             });
+            
+            let filteredContests = dummyContests;
+            
             if (response.success && response.data && Array.isArray(response.data) && response.data.length > 0) {
-                setContests(response.data);
-            } else {
-                // Use dummy data if API returns empty or fails
-                let filtered = dummyContests.filter(c => {
-                    if (filters.status && c.status !== filters.status) return false;
-                    if (filters.category && c.category !== filters.category) return false;
-                    if (filters.search && !c.title.toLowerCase().includes(filters.search.toLowerCase())) return false;
-                    return true;
-                });
-                
-                // Sort contests
-                filtered = [...filtered].sort((a, b) => {
-                    if (sortBy === 'time-left') {
-                        const aTime = new Date(a.deadline).getTime();
-                        const bTime = new Date(b.deadline).getTime();
-                        return sortDir === 'asc' ? aTime - bTime : bTime - aTime;
-                    } else if (sortBy === 'prize') {
-                        return sortDir === 'asc' ? a.prize - b.prize : b.prize - a.prize;
-                    } else if (sortBy === 'entries') {
-                        const aEntries = a.submissions?.length || 0;
-                        const bEntries = b.submissions?.length || 0;
-                        return sortDir === 'asc' ? aEntries - bEntries : bEntries - aEntries;
-                    }
-                    return 0;
-                });
-                
-                setContests(filtered);
+                filteredContests = response.data;
             }
+            
+            // Apply filters based on URL params
+            if (state === 'active') {
+                filteredContests = filteredContests.filter(c => 
+                    c.status === 'open' || c.status === 'qualifying' || c.status === 'final_round'
+                );
+                if (activeState === 'watching') {
+                    filteredContests = filteredContests.filter(c => watchingContests.has(c.id) || c.isWatching);
+                }
+            } else if (state === 'watching') {
+                filteredContests = filteredContests.filter(c => watchingContests.has(c.id) || c.isWatching);
+            }
+            
+            // Sort contests
+            filteredContests = [...filteredContests].sort((a, b) => {
+                if (order === 'time-left') {
+                    const aTime = new Date(a.deadline).getTime();
+                    const bTime = new Date(b.deadline).getTime();
+                    return dir === 'asc' ? aTime - bTime : bTime - aTime;
+                } else if (order === 'prize') {
+                    return dir === 'asc' ? a.prize - b.prize : b.prize - a.prize;
+                }
+                return 0;
+            });
+            
+            setContests(filteredContests);
         } catch (error) {
             console.error('Error loading contests:', error);
-            // Use dummy data on error
-            const filtered = dummyContests.filter(c => {
-                if (filters.status && c.status !== filters.status) return false;
-                if (filters.category && c.category !== filters.category) return false;
-                if (filters.search && !c.title.toLowerCase().includes(filters.search.toLowerCase())) return false;
-                return true;
-            });
-            setContests(filtered);
+            setContests(dummyContests);
         } finally {
             setLoading(false);
         }
@@ -210,12 +233,21 @@ export default function DesignerContestsPage() {
         }
     };
 
-    useEffect(() => {
-        loadContests();
-    }, [filters.status, filters.category, sortBy, sortDir]);
+    const loadWatchingContests = async () => {
+        // TODO: Replace with actual API call
+        setWatchingContests(new Set([1, 3, 5]));
+    };
 
-    const handleSearch = () => {
-        loadContests();
+    const updateUrlParams = (newParams: Record<string, string>) => {
+        const params = new URLSearchParams(searchParams.toString());
+        Object.entries(newParams).forEach(([key, value]) => {
+            if (value) {
+                params.set(key, value);
+            } else {
+                params.delete(key);
+            }
+        });
+        router.push(`/designer/your-contests?${params.toString()}`);
     };
 
     const getTimeRemaining = (deadline: string) => {
@@ -240,6 +272,11 @@ export default function DesignerContestsPage() {
         return badges[status] || badges.open;
     };
 
+    const activeContestsCount = dummyContests.filter(c => 
+        c.status === 'open' || c.status === 'qualifying' || c.status === 'final_round'
+    ).length;
+    const watchingCount = dummyContests.filter(c => watchingContests.has(c.id) || c.isWatching).length;
+
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Header */}
@@ -247,21 +284,73 @@ export default function DesignerContestsPage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                     <div className="flex items-center justify-between mb-6">
                         <div>
-                            <h1 className="text-3xl font-bold text-gray-900">Browse contests</h1>
-                            <p className="text-gray-600 mt-1">Find contests that match your skills and interests</p>
-                        </div>
-                        <div className="flex gap-3">
-                            <Link href="/designer/your-contests">
-                                <Button variant="outline">Your contests</Button>
-                            </Link>
-                            <Link href="/designer/dashboard">
-                                <Button variant="outline">Dashboard</Button>
-                            </Link>
+                            <h1 className="text-3xl font-bold text-gray-900">Your contests</h1>
+                            <p className="text-gray-600 mt-1">Manage and track your contest participation</p>
                         </div>
                     </div>
 
+                    {/* Tabs */}
+                    <div className="flex gap-1 border-b border-gray-200">
+                        <button
+                            onClick={() => updateUrlParams({ state: 'active', 'active-state': '' })}
+                            className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+                                state === 'active'
+                                    ? 'border-black text-black'
+                                    : 'border-transparent text-gray-600 hover:text-gray-900'
+                            }`}
+                        >
+                            Active ({activeContestsCount})
+                        </button>
+                        <button
+                            onClick={() => updateUrlParams({ state: 'watching', 'active-state': '' })}
+                            className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+                                state === 'watching'
+                                    ? 'border-black text-black'
+                                    : 'border-transparent text-gray-600 hover:text-gray-900'
+                            }`}
+                        >
+                            Watching ({watchingCount})
+                        </button>
+                        <button
+                            onClick={() => updateUrlParams({ state: 'all', 'active-state': '' })}
+                            className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+                                state === 'all' || !state
+                                    ? 'border-black text-black'
+                                    : 'border-transparent text-gray-600 hover:text-gray-900'
+                            }`}
+                        >
+                            All contests
+                        </button>
+                    </div>
+
+                    {/* Active State Filter (only for active tab) */}
+                    {state === 'active' && (
+                        <div className="mt-4 flex gap-2">
+                            <button
+                                onClick={() => updateUrlParams({ 'active-state': 'all' })}
+                                className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
+                                    activeState === 'all' || !activeState
+                                        ? 'bg-gray-900 text-white'
+                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                }`}
+                            >
+                                All active
+                            </button>
+                            <button
+                                onClick={() => updateUrlParams({ 'active-state': 'watching' })}
+                                className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
+                                    activeState === 'watching'
+                                        ? 'bg-gray-900 text-white'
+                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                }`}
+                            >
+                                Watching
+                            </button>
+                        </div>
+                    )}
+
                     {/* Search and Filters */}
-                    <div className="space-y-4">
+                    <div className="mt-6 space-y-4">
                         <div className="flex gap-4">
                             <div className="flex-1 relative">
                                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -270,26 +359,9 @@ export default function DesignerContestsPage() {
                                     placeholder="Search contests..."
                                     value={filters.search}
                                     onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-                                    onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
                                 />
                             </div>
-                            <Button onClick={handleSearch} className="bg-black text-white hover:bg-gray-800">
-                                Search
-                            </Button>
-                        </div>
-
-                        <div className="flex flex-wrap items-center gap-3">
-                            <select
-                                value={filters.status}
-                                onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-                                className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-black focus:border-transparent"
-                            >
-                                <option value="open">Open Contests</option>
-                                <option value="qualifying">Qualifying Round</option>
-                                <option value="final_round">Final Round</option>
-                            </select>
-
                             <select
                                 value={filters.category}
                                 onChange={(e) => setFilters({ ...filters, category: e.target.value })}
@@ -300,63 +372,38 @@ export default function DesignerContestsPage() {
                                     <option key={cat} value={cat}>{cat}</option>
                                 ))}
                             </select>
+                        </div>
 
-                            {/* Sort Options */}
-                            <div className="flex items-center gap-2 ml-auto">
-                                <span className="text-sm text-gray-600">Sort by:</span>
-                                <div className="flex gap-2">
-                                    <button
-                                        onClick={() => {
-                                            const newDir = sortBy === 'time-left' && sortDir === 'asc' ? 'desc' : 'asc';
-                                            setSortBy('time-left');
-                                            setSortDir(newDir);
-                                        }}
-                                        className={`px-3 py-1.5 text-sm rounded-md flex items-center gap-1 transition-colors ${
-                                            sortBy === 'time-left'
-                                                ? 'bg-gray-900 text-white'
-                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                        }`}
-                                    >
-                                        Time left
-                                        {sortBy === 'time-left' && (
-                                            sortDir === 'asc' ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />
-                                        )}
-                                    </button>
-                                    <button
-                                        onClick={() => {
-                                            const newDir = sortBy === 'prize' && sortDir === 'asc' ? 'desc' : 'asc';
-                                            setSortBy('prize');
-                                            setSortDir(newDir);
-                                        }}
-                                        className={`px-3 py-1.5 text-sm rounded-md flex items-center gap-1 transition-colors ${
-                                            sortBy === 'prize'
-                                                ? 'bg-gray-900 text-white'
-                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                        }`}
-                                    >
-                                        Prize
-                                        {sortBy === 'prize' && (
-                                            sortDir === 'asc' ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />
-                                        )}
-                                    </button>
-                                    <button
-                                        onClick={() => {
-                                            const newDir = sortBy === 'entries' && sortDir === 'asc' ? 'desc' : 'asc';
-                                            setSortBy('entries');
-                                            setSortDir(newDir);
-                                        }}
-                                        className={`px-3 py-1.5 text-sm rounded-md flex items-center gap-1 transition-colors ${
-                                            sortBy === 'entries'
-                                                ? 'bg-gray-900 text-white'
-                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                        }`}
-                                    >
-                                        Entries
-                                        {sortBy === 'entries' && (
-                                            sortDir === 'asc' ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />
-                                        )}
-                                    </button>
-                                </div>
+                        {/* Sort Options */}
+                        <div className="flex items-center gap-4">
+                            <span className="text-sm text-gray-600">Sort by:</span>
+                            <div className="flex gap-2">
+                                <button
+                                    onClick={() => updateUrlParams({ order: 'time-left', dir: dir === 'asc' ? 'desc' : 'asc' })}
+                                    className={`px-3 py-1.5 text-sm rounded-md flex items-center gap-1 transition-colors ${
+                                        order === 'time-left'
+                                            ? 'bg-gray-900 text-white'
+                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                    }`}
+                                >
+                                    Time left
+                                    {order === 'time-left' && (
+                                        dir === 'asc' ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />
+                                    )}
+                                </button>
+                                <button
+                                    onClick={() => updateUrlParams({ order: 'prize', dir: dir === 'asc' ? 'desc' : 'asc' })}
+                                    className={`px-3 py-1.5 text-sm rounded-md flex items-center gap-1 transition-colors ${
+                                        order === 'prize'
+                                            ? 'bg-gray-900 text-white'
+                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                    }`}
+                                >
+                                    Prize
+                                    {order === 'prize' && (
+                                        dir === 'asc' ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />
+                                    )}
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -381,6 +428,7 @@ export default function DesignerContestsPage() {
                         {contests.map((contest) => {
                             const badge = getStatusBadge(contest.status);
                             const hasSubmitted = mySubmissions.has(contest.id);
+                            const isWatching = watchingContests.has(contest.id) || contest.isWatching;
                             
                             return (
                                 <Link
@@ -407,14 +455,13 @@ export default function DesignerContestsPage() {
                                             }
                                             alt={contest.title}
                                             className="w-full h-full object-cover"
-                                            onError={(e) => {
-                                                const target = e.target as HTMLImageElement;
-                                                target.style.display = 'none';
-                                                const parent = target.parentElement!;
-                                                parent.className = 'h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center';
-                                                parent.innerHTML = '<svg class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>';
-                                            }}
                                         />
+                                        {isWatching && (
+                                            <div className="absolute top-2 right-2 bg-black bg-opacity-75 text-white px-2 py-1 rounded text-xs flex items-center gap-1">
+                                                <Eye className="h-3 w-3" />
+                                                Watching
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="p-6">
                                         <div className="flex items-start justify-between mb-4">
@@ -467,7 +514,7 @@ export default function DesignerContestsPage() {
                                                         className="h-6 w-6 rounded-full"
                                                     />
                                                 ) : (
-                                                    <div className="h-6 w-6 rounded-full bg-gray-300 rounded-full"></div>
+                                                    <div className="h-6 w-6 rounded-full bg-gray-300"></div>
                                                 )}
                                                 <span className="text-sm text-gray-600">{contest.client?.name}</span>
                                             </div>

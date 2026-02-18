@@ -22,7 +22,7 @@ export const getMyMessages = async (
 ): Promise<void> => {
   try {
     const userId = parseInt(req.user!.id);
-    const { isRead, type } = req.query;
+    const { isRead } = req.query;
 
     const where: any = {
       [Op.or]: [
@@ -121,7 +121,7 @@ export const getConversation = async (
       {
         where: {
           receiverId: userId,
-          senderId: otherUserId,
+          senderId: parseInt(otherUserId as string),
           isRead: false
         }
       }

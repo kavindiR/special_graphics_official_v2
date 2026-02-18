@@ -91,7 +91,7 @@ export default function DesignerNav() {
                         <nav className="hidden md:flex items-center gap-6 flex-1 ml-12">
                             <DropdownMenu open={yourWorkOpen} onOpenChange={setYourWorkOpen}>
                                 <DropdownMenuTrigger className={`flex items-center gap-1 font-medium transition-colors ${
-                                    isActive('/designer/contests') || isActive('/designer/dashboard') || isActive('/designer/portfolio')
+                                    isActive('/designer/contests') || isActive('/designer/your-contests') || isActive('/designer/dashboard') || isActive('/designer/portfolio')
                                         ? 'text-gray-900'
                                         : 'text-gray-700 hover:text-gray-900'
                                 }`}>
@@ -100,15 +100,9 @@ export default function DesignerNav() {
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="start" className="w-48">
                                     <DropdownMenuItem asChild>
-                                        <Link href="/designer/contests" className="flex items-center gap-2">
+                                        <Link href="/designer/your-contests" className="flex items-center gap-2">
                                             <Folder className="h-4 w-4" />
-                                            Contests
-                                        </Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem asChild>
-                                        <Link href="/designer/dashboard" className="flex items-center gap-2">
-                                            <Folder className="h-4 w-4" />
-                                            Projects
+                                            Your contests
                                         </Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem asChild>
@@ -119,8 +113,8 @@ export default function DesignerNav() {
                                     </DropdownMenuItem>
                                     <DropdownMenuItem asChild>
                                         <Link href="/designer/dashboard" className="flex items-center gap-2">
-                                            <List className="h-4 w-4" />
-                                            Browse projects
+                                            <Folder className="h-4 w-4" />
+                                            Projects
                                         </Link>
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>

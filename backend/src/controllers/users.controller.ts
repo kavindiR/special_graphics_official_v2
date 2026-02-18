@@ -5,7 +5,7 @@ import { AppError } from '../middleware/errorHandler';
 
 // Get all users
 export const getAllUsers = async (
-  req: AuthRequest,
+  _req: AuthRequest,
   res: Response,
   next: NextFunction
 ): Promise<void> => {

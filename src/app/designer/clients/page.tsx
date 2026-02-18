@@ -162,22 +162,27 @@ export default function DesignerClientsPage() {
         <div className="min-h-screen bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {/* Header */}
-                <div className="flex items-center justify-between mb-6">
-                    <h1 className="text-3xl font-bold text-gray-900">Your clients</h1>
-                    <Button className="bg-black text-white hover:bg-gray-800">
-                        Invite by email
-                    </Button>
+                <div className="mb-6">
+                    <div className="flex items-center justify-between mb-4">
+                        <h1 className="text-3xl font-bold text-gray-900">Your clients</h1>
+                        <Button className="bg-black text-white hover:bg-gray-800">
+                            Invite by email
+                        </Button>
+                    </div>
+                    <p className="text-gray-600 text-sm">
+                        Manage your client relationships and track your work history
+                    </p>
                 </div>
 
                 <div className="flex gap-6">
                     {/* Sidebar Filters */}
                     <div className="w-64 flex-shrink-0">
-                        <div className="bg-white border border-gray-200 rounded-lg p-4 space-y-2">
+                        <div className="bg-white border border-gray-200 rounded-lg p-4 space-y-1">
                             <button
                                 onClick={() => setActiveFilter('all')}
                                 className={`w-full text-left px-3 py-2 rounded-md flex items-center gap-2 transition-colors ${
                                     activeFilter === 'all'
-                                        ? 'bg-gray-100 text-gray-900 font-medium'
+                                        ? 'bg-gray-900 text-white font-medium'
                                         : 'text-gray-700 hover:bg-gray-50'
                                 }`}
                             >
@@ -188,7 +193,7 @@ export default function DesignerClientsPage() {
                                 onClick={() => setActiveFilter('favorites')}
                                 className={`w-full text-left px-3 py-2 rounded-md flex items-center gap-2 transition-colors ${
                                     activeFilter === 'favorites'
-                                        ? 'bg-gray-100 text-gray-900 font-medium'
+                                        ? 'bg-gray-900 text-white font-medium'
                                         : 'text-gray-700 hover:bg-gray-50'
                                 }`}
                             >
@@ -199,7 +204,7 @@ export default function DesignerClientsPage() {
                                 onClick={() => setActiveFilter('worked_together')}
                                 className={`w-full text-left px-3 py-2 rounded-md flex items-center gap-2 transition-colors ${
                                     activeFilter === 'worked_together'
-                                        ? 'bg-gray-100 text-gray-900 font-medium'
+                                        ? 'bg-gray-900 text-white font-medium'
                                         : 'text-gray-700 hover:bg-gray-50'
                                 }`}
                             >
@@ -210,7 +215,7 @@ export default function DesignerClientsPage() {
                                 onClick={() => setActiveFilter('active_contests')}
                                 className={`w-full text-left px-3 py-2 rounded-md flex items-center gap-2 transition-colors ${
                                     activeFilter === 'active_contests'
-                                        ? 'bg-gray-100 text-gray-900 font-medium'
+                                        ? 'bg-gray-900 text-white font-medium'
                                         : 'text-gray-700 hover:bg-gray-50'
                                 }`}
                             >
@@ -221,7 +226,7 @@ export default function DesignerClientsPage() {
                                 onClick={() => setActiveFilter('active_projects')}
                                 className={`w-full text-left px-3 py-2 rounded-md flex items-center gap-2 transition-colors ${
                                     activeFilter === 'active_projects'
-                                        ? 'bg-gray-100 text-gray-900 font-medium'
+                                        ? 'bg-gray-900 text-white font-medium'
                                         : 'text-gray-700 hover:bg-gray-50'
                                 }`}
                             >

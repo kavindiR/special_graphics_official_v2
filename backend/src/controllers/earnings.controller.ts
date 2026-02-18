@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import Earnings from '../models/Earnings.model';
-import User from '../models/User.model';
 import Contest from '../models/Contest.model';
 import { AppError } from '../middleware/errorHandler';
 
@@ -156,5 +155,9 @@ export const getEarningsStats = async (
     next(error);
   }
 };
+
+
+
+
 
 

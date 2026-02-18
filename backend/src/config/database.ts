@@ -62,13 +62,6 @@ export const connectDatabase = async (): Promise<void> => {
       console.log('✅ Database models synchronized');
     }
     
-    // Only set up pool error handler for non-SQLite databases
-    if (!isSqlite && sequelize.connectionManager.pool) {
-      sequelize.connectionManager.pool.on('error', (err: Error) => {
-        console.error('❌ Database connection pool error:', err);
-      });
-    }
-    
     // Graceful shutdown
     process.on('SIGINT', async () => {
       await sequelize.close();

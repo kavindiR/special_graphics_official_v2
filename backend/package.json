@@ -7,6 +7,8 @@
     "dev": "nodemon --exec ts-node src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
+    "init-db": "npx ts-node init-database.ts",
+    "init-db:js": "node init-database.js",
     "lint": "eslint src --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

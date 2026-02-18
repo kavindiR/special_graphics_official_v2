@@ -20,7 +20,7 @@ export default function Hero() {
     }, []);
 
     return (
-        <section className="relative bg-[#0a0015] text-white overflow-hidden min-h-[500px] md:min-h-[600px] flex items-center z-10">
+        <section className="relative bg-[#0a0015] text-white overflow-hidden min-h-[400px] sm:min-h-[500px] md:min-h-[600px] flex items-center z-10">
 
             {/* Background Slideshow */}
             <div className="absolute inset-0 w-full h-full z-0">
@@ -38,24 +38,24 @@ export default function Hero() {
                             priority={index === 0}
                             sizes="100vw"
                         />
-                        {/* Gradient Mask to fade into center (optional, but keep for style consistency if desired, or just dark overlay) */}
-                        <div className="absolute inset-0 bg-black/40"></div>
+                        {/* Gradient Mask to fade into center */}
+                        <div className="absolute inset-0 bg-black/40 sm:bg-black/30 md:bg-black/20"></div>
                     </div>
                 ))}
             </div>
 
             {/* Dark overlay for mobile readability */}
-            <div className="absolute inset-0 bg-[#0a0015]/20 md:bg-transparent z-0 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-[#0a0015]/30 sm:bg-[#0a0015]/20 md:bg-transparent z-0 pointer-events-none"></div>
 
             {/* Content */}
-            <div className="container mx-auto px-4 relative z-10 text-center flex flex-col items-center pt-10 pb-32">
-                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight drop-shadow-lg">
-                    Start Your Dream Business with <br className="hidden md:block" />
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center flex flex-col items-center pt-8 sm:pt-10 md:pt-12 pb-20 sm:pb-24 md:pb-32">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-5 md:mb-6 leading-tight drop-shadow-lg px-2 sm:px-0">
+                    Start Your Dream Business with <br className="hidden sm:block md:hidden" /><br className="hidden md:block" />
                     <span className="text-white">World Class</span> <br className="hidden md:block" />
                     <span className="text-white">Designs</span>
                 </h1>
 
-                <p className="text-gray-200 mb-8 max-w-2xl text-base md:text-lg drop-shadow-md">
+                <p className="text-gray-200 mb-6 sm:mb-7 md:mb-8 max-w-2xl text-sm sm:text-base md:text-lg drop-shadow-md px-4 sm:px-6 md:px-0">
                     No matter what your business needs, we can connect you with a creative expert. What do you need to design?
                 </p>
             </div>

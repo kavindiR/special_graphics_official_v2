@@ -29,79 +29,79 @@ const VisaLogo = () => (
 
 export default function Footer() {
     return (
-        <footer className="bg-black text-white pt-12 pb-8">
-            <div className="container mx-auto px-4">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-12">
+        <footer className="bg-black text-white pt-8 sm:pt-10 md:pt-12 pb-6 sm:pb-8">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 mb-8 sm:mb-10 md:mb-12">
                     {/* Company Column */}
-                    <div className="flex flex-col gap-3">
-                        <h4 className="font-bold text-base mb-2">Company</h4>
-                        <Link href="/contact" className="text-white hover:text-gray-300 transition-colors text-sm">Contact</Link>
-                        <Link href="/careers" className="text-white hover:text-gray-300 transition-colors text-sm">Careers</Link>
-                        <Link href="/team" className="text-white hover:text-gray-300 transition-colors text-sm">Team</Link>
-                        <Link href="/press" className="text-white hover:text-gray-300 transition-colors text-sm">Press releases</Link>
+                    <div className="flex flex-col gap-2 sm:gap-3">
+                        <h4 className="font-bold text-sm sm:text-base mb-1 sm:mb-2">Company</h4>
+                        <Link href="/contact" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Contact</Link>
+                        <Link href="/careers" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Careers</Link>
+                        <Link href="/team" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Team</Link>
+                        <Link href="/press" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Press releases</Link>
                     </div>
 
                     {/* Categories Column */}
-                    <div className="flex flex-col gap-3">
-                        <h4 className="font-bold text-base mb-2">Categories</h4>
-                        <Link href="/category/advertising" className="text-white hover:text-gray-300 transition-colors text-sm">Advertising Services</Link>
-                        <Link href="/category/social-media" className="text-white hover:text-gray-300 transition-colors text-sm">Social Media Services</Link>
-                        <Link href="/category/content-marketing" className="text-white hover:text-gray-300 transition-colors text-sm">Content Marketing</Link>
-                        <Link href="/category/graphic-design" className="text-white hover:text-gray-300 transition-colors text-sm">Graphic Design & Branding</Link>
-                        <Link href="/category/animation" className="text-white hover:text-gray-300 transition-colors text-sm">Animation & Video Production</Link>
-                        <Link href="/category/seo" className="text-white hover:text-gray-300 transition-colors text-sm">SEO & Website Development</Link>
-                        <Link href="/category/media-pr" className="text-white hover:text-gray-300 transition-colors text-sm">Media & PR Services</Link>
-                        <Link href="/category/email-marketing" className="text-white hover:text-gray-300 transition-colors text-sm">Email Marketing & Automation</Link>
+                    <div className="flex flex-col gap-2 sm:gap-3">
+                        <h4 className="font-bold text-sm sm:text-base mb-1 sm:mb-2">Categories</h4>
+                        <Link href="/category/advertising" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Advertising Services</Link>
+                        <Link href="/category/social-media" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Social Media Services</Link>
+                        <Link href="/category/content-marketing" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Content Marketing</Link>
+                        <Link href="/category/graphic-design" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Graphic Design & Branding</Link>
+                        <Link href="/category/animation" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Animation & Video Production</Link>
+                        <Link href="/category/seo" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">SEO & Website Development</Link>
+                        <Link href="/category/media-pr" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Media & PR Services</Link>
+                        <Link href="/category/email-marketing" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Email Marketing & Automation</Link>
                     </div>
 
                     {/* Marketing Solutions Column */}
-                    <div className="flex flex-col gap-3">
-                        <h4 className="font-bold text-base mb-2">Marketing Solutions</h4>
-                        <Link href="/solutions/social-media-ads" className="text-white hover:text-gray-300 transition-colors text-sm">Social Media Ads</Link>
-                        <Link href="/solutions/google-seo" className="text-white hover:text-gray-300 transition-colors text-sm">Google SEO & Blogs</Link>
-                        <Link href="/solutions/bulk-emails" className="text-white hover:text-gray-300 transition-colors text-sm">Bulk Emails & SMS</Link>
-                        <Link href="/solutions/lead-generation" className="text-white hover:text-gray-300 transition-colors text-sm">Lead Generation</Link>
-                        <Link href="/solutions/branding" className="text-white hover:text-gray-300 transition-colors text-sm">Branding & Logo Design</Link>
-                        <Link href="/solutions/website-development" className="text-white hover:text-gray-300 transition-colors text-sm">Website Development</Link>
-                        <Link href="/categories" className="text-white hover:text-gray-300 transition-colors text-sm">Browse all categories</Link>
+                    <div className="flex flex-col gap-2 sm:gap-3">
+                        <h4 className="font-bold text-sm sm:text-base mb-1 sm:mb-2">Marketing Solutions</h4>
+                        <Link href="/solutions/social-media-ads" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Social Media Ads</Link>
+                        <Link href="/solutions/google-seo" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Google SEO & Blogs</Link>
+                        <Link href="/solutions/bulk-emails" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Bulk Emails & SMS</Link>
+                        <Link href="/solutions/lead-generation" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Lead Generation</Link>
+                        <Link href="/solutions/branding" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Branding & Logo Design</Link>
+                        <Link href="/solutions/website-development" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Website Development</Link>
+                        <Link href="/categories" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Browse all categories</Link>
                     </div>
 
                     {/* Info Column */}
-                    <div className="flex flex-col gap-3">
-                        <h4 className="font-bold text-base mb-2">Info</h4>
-                        <Link href="/faq" className="text-white hover:text-gray-300 transition-colors text-sm">FAQ</Link>
-                        <Link href="/about" className="text-white hover:text-gray-300 transition-colors text-sm">About Us</Link>
-                        <Link href="/support" className="text-white hover:text-gray-300 transition-colors text-sm">Customer Support</Link>
+                    <div className="flex flex-col gap-2 sm:gap-3">
+                        <h4 className="font-bold text-sm sm:text-base mb-1 sm:mb-2">Info</h4>
+                        <Link href="/faq" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">FAQ</Link>
+                        <Link href="/about" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">About Us</Link>
+                        <Link href="/support" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Customer Support</Link>
                     </div>
 
                     {/* Lets Us Help Column */}
-                    <div className="flex flex-col gap-3">
-                        <h4 className="font-bold text-base mb-2">Lets Us Help</h4>
-                        <Link href="/account" className="text-white hover:text-gray-300 transition-colors text-sm">My Account</Link>
-                        <Link href="/shipping" className="text-white hover:text-gray-300 transition-colors text-sm">Shipping & Returns</Link>
-                        <Link href="/ideas" className="text-white hover:text-gray-300 transition-colors text-sm">Ideas & Advice</Link>
-                        <Link href="/accessibility" className="text-white hover:text-gray-300 transition-colors text-sm">Accessibility</Link>
-                        <Link href="/sustainability" className="text-white hover:text-gray-300 transition-colors text-sm">Sustainability</Link>
+                    <div className="flex flex-col gap-2 sm:gap-3">
+                        <h4 className="font-bold text-sm sm:text-base mb-1 sm:mb-2">Lets Us Help</h4>
+                        <Link href="/account" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">My Account</Link>
+                        <Link href="/shipping" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Shipping & Returns</Link>
+                        <Link href="/ideas" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Ideas & Advice</Link>
+                        <Link href="/accessibility" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Accessibility</Link>
+                        <Link href="/sustainability" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors text-xs sm:text-sm min-h-[32px] flex items-center touch-manipulation">Sustainability</Link>
                     </div>
                 </div>
 
                 {/* Bottom Section */}
-                <div className="border-t border-white pt-6">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-                        <div className="flex flex-wrap justify-center md:justify-start items-center gap-2 text-white">
+                <div className="border-t border-white/20 pt-4 sm:pt-6">
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6 text-xs sm:text-sm">
+                        <div className="flex flex-wrap justify-center md:justify-start items-center gap-2 text-white/90 text-center md:text-left">
                             <span>© 2014 - 2025 Special Graphics LLC | Special Graphics (PVT) LTD</span>
                         </div>
-                        <div className="flex flex-wrap justify-center md:justify-end items-center gap-4">
-                            <div className="flex items-center gap-2 text-white">
-                                <Link href="/terms" className="hover:text-gray-300 transition-colors">Terms and Conditions</Link>
-                                <span>|</span>
-                                <Link href="/privacy" className="hover:text-gray-300 transition-colors">Privacy</Link>
+                        <div className="flex flex-wrap justify-center md:justify-end items-center gap-3 sm:gap-4">
+                            <div className="flex items-center gap-2 text-white/90">
+                                <Link href="/terms" className="hover:text-gray-300 active:text-gray-400 transition-colors touch-manipulation min-h-[32px] flex items-center">Terms and Conditions</Link>
+                                <span className="hidden sm:inline">|</span>
+                                <Link href="/privacy" className="hover:text-gray-300 active:text-gray-400 transition-colors touch-manipulation min-h-[32px] flex items-center">Privacy</Link>
                             </div>
-                            <div className="flex items-center gap-2 text-white">
+                            <div className="flex items-center gap-2 text-white/90">
                                 <span>English</span>
-                                <span className="hover:text-gray-300 cursor-pointer transition-colors">Español</span>
+                                <span className="hover:text-gray-300 active:text-gray-400 cursor-pointer transition-colors touch-manipulation min-h-[32px] flex items-center">Español</span>
                             </div>
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2 sm:gap-3">
                                 <MastercardLogo />
                                 <PayPalLogo />
                                 <VisaLogo />
@@ -109,21 +109,21 @@ export default function Footer() {
                         </div>
                     </div>
                     {/* Social Media Icons */}
-                    <div className="flex justify-center md:justify-start items-center gap-4 pt-4">
-                        <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors">
-                            <Facebook size={20} />
+                    <div className="flex justify-center md:justify-start items-center gap-3 sm:gap-4 pt-4 sm:pt-6">
+                        <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center touch-manipulation">
+                            <Facebook size={18} className="sm:w-5 sm:h-5" />
                         </Link>
-                        <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors">
-                            <Twitter size={20} />
+                        <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center touch-manipulation">
+                            <Twitter size={18} className="sm:w-5 sm:h-5" />
                         </Link>
-                        <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors">
-                            <Instagram size={20} />
+                        <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center touch-manipulation">
+                            <Instagram size={18} className="sm:w-5 sm:h-5" />
                         </Link>
-                        <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors">
-                            <Linkedin size={20} />
+                        <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center touch-manipulation">
+                            <Linkedin size={18} className="sm:w-5 sm:h-5" />
                         </Link>
-                        <Link href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors">
-                            <Youtube size={20} />
+                        <Link href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 active:text-gray-400 transition-colors min-w-[40px] min-h-[40px] flex items-center justify-center touch-manipulation">
+                            <Youtube size={18} className="sm:w-5 sm:h-5" />
                         </Link>
                     </div>
                 </div>
